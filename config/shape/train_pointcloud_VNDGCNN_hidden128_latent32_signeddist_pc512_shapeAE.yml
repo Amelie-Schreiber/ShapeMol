@@ -1,0 +1,50 @@
+data:
+  dataset: moses2
+  datasize: 300
+  name: shape
+  loss_type: signed_distance
+  path: ./data/MOSES2_training_val_dataset.pkl
+  data_name: MOSES2_training_val_shape_dataset
+  split: True
+  shape_type: point_cloud
+  num_samples: 1024
+  max_dist: 11
+  grid_resolution: 0.5
+  num_workers: 20
+  point_cloud_samples: 512
+  version: v1
+
+model:
+  model_type: PointCloud_AE
+  encoder: VN_DGCNN
+  loss_type: signed_distance
+  latent_dim: 32
+  hidden_dim: 128 # latent dim
+  point_dim: 3
+  layer_num: 4
+  num_k: 20
+
+train:
+  seed: 2021
+  batch_size: 32
+  point_batch_size: 1024
+  num_workers: 20
+  epoch: 20
+  max_iters: 1000000
+  val_freq: 2000
+  pos_noise_std: 0.1
+  max_grad_norm: 8.0
+  bond_loss_weight: 1.0
+  shuffle: True
+  optimizer:
+    type: adam
+    lr: 1.e-3
+    weight_decay: 0
+    beta1: 0.95
+    beta2: 0.999
+  scheduler:
+    type: plateau
+    factor: 0.6
+    patience: 5
+    min_lr: 1.e-6
+  n_acc_batch: 1

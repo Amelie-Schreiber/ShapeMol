@@ -1,0 +1,96 @@
+data:
+  name: shapemol
+  dataset: moses2
+  version: v5_dgcnn_signeddist_512
+  datasize: 300
+  chunk_size: 50000
+  num_workers: 10
+  processed_path: ./processed_data/
+  path: ./data/MOSES2_training_val_dataset.pkl
+  split: True
+  transform:
+    ligand_atom_mode: add_aromatic
+  shape:
+    shape_type: pointAE_shape
+    point_cloud_samples: 512
+    shape_parallel: False
+    num_workers: 1
+    batch_size: 32
+    checkpoint: ./trained_models/se_model.pt
+
+model:
+  denoise_type: diffusion
+  model_mean_type: C0
+  topo_emb_type: None
+  gt_noise_type: origin
+  schedule_pos:
+    beta_schedule: sigmoid
+    beta_start: 1.e-7
+    beta_end: 0.01
+    s: 6
+  schedule_v:
+    beta_schedule: cosine
+    s: 0.01
+  num_diffusion_timesteps: 1000
+  loss_v_weight: 100.0
+  v_mode: uniform
+  v_net_type: mlp
+  loss_pos_type: mse
+  sample_time_method: symmetric
+  loss_weight_type: noise_level
+  loss_pos_min_weight: 0
+  loss_pos_max_weight: 10
+  time_emb_dim: 8
+  time_emb_mode: simple
+  center_pos_mode: none
+  atom_enc_mode: add_aromatic
+  node_indicator: True
+  model_type: uni_o2
+  num_blocks: 1
+  num_layers: 8
+  hidden_dim: 128
+  n_heads: 16
+  edge_feat_dim: 0
+  edge_feat: covalent_bond
+  num_r_gaussian: 20
+  knn: 8
+  num_node_types: 8
+  act_fn: relu
+  norm: True
+  cutoff_mode: knn
+  ew_net_type: global
+  r_feat_mode: sparse
+  energy_h_mode: basic
+  num_x2h: 1
+  num_h2x: 1
+  num_topo: 1
+  r_max: 10.0
+  x2h_out_fc: False
+  sync_twoup: False
+  shape_dim: 32
+  shape_latent_dim: 32
+  shape_mode: attention_residue
+  shape_type: pointAE_shape
+  cond_mask_prob: 0.0
+
+train:
+  seed: 2021
+  batch_size: 32
+  num_workers: 10
+  max_iters: 10000000
+  val_freq: 2000
+  pos_noise_std: 0.1
+  max_grad_norm: 8.0
+  bond_loss_weight: 1.0
+  optimizer:
+    type: adam
+    lr: 0.001
+    weight_decay: 0
+    beta1: 0.95
+    beta2: 0.999
+  scheduler:
+    type: plateau
+    factor: 0.6
+    patience: 10
+    min_lr: 1.e-05
+  n_acc_batch: 1

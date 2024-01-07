@@ -1,0 +1,37 @@
+data:
+  name: shapemol
+  dataset: moses2
+  version: v1_dgcnn_signeddist_512
+  datasize: 10
+  chunk_size: 1000
+  num_workers: 5
+  processed_path: ./processed_data/
+  path: ./data/MOSES2_test_mol.pkl
+  transform:
+    ligand_atom_mode: add_aromatic
+    random_rot: False
+  shape:
+    shape_type: pointAE_shape
+    point_cloud_samples: 512
+    shape_parallel: False
+    num_workers: 10
+    batch_size: 8
+    checkpoint: ./trained_models/se_model.pt
+
+model:
+  checkpoint: ./trained_models/diff_model.pt
+
+sample:
+  seed: 2021
+  num_samples: 50
+  num_steps: 1000
+  pos_only: False
+  use_grad: False
+  use_mesh: False
+  use_mesh_gap: 0.3
+  use_pointcloud: True
+  use_pointcloud_radius: 0.2
+  grad_step: 300
+  center_pos_mode: none
+  sample_num_atoms: size
+  init_scale: False

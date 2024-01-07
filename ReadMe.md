@@ -1,32 +1,23 @@
 # Equivariant Shape-Guided Diffusion Model for 3D Molecule Generation
 
 ### Requirements
-
+```
 Python - 3.7.16
-
 RDKit - 2022.9.5
-
 openbabel - 3.0.0
-
 oddt - 0.7
-
 pytorch - 1.11.0 + cuda11.3
-
 pytorch3d - 0.7.1
-
 torch-cluster - 1.6.0
-
 torch-scatter - 2.0.9
-
 torch-geometric - 2.3.0
-
 numpy - 1.21.5
-
 scikit-learn - 1.0.2
-
 scipy - 1.7.2
-
-Other packages include tqdm, yaml, lmdb.
+tqdm
+yaml
+lmdb
+```
 
 ### Training
 

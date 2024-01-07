@@ -1,4 +1,8 @@
-# Equivariant Shape-Guided Diffusion Model for 3D Molecule Generation
+# (Unofficial Implementation) Equivariant Shape-Guided Diffusion Model for 3D Molecule Generation
+
+## Paper
+[Shape-conditioned 3D Molecule Generation via
+Equivariant Diffusion Models](https://openreview.net/forum?id=JWfvMT43pZ)
 
 ### Requirements
 ```
